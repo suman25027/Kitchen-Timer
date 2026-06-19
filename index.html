@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kitchen Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scene">
+  <div class="timer-body">
+
+    <div class="brand">KITCHEN TIMER</div>
+
+    <div class="lcd" id="lcd">
+      <div class="digits-row">
+        <div class="digit-slot">
+          <div class="digit-ghost">88</div>
+          <div class="digit-val" id="d-min">00</div>
+        </div>
+        <div class="colon" id="colon">:</div>
+        <div class="digit-slot">
+          <div class="digit-ghost">88</div>
+          <div class="digit-val" id="d-sec">00</div>
+        </div>
+      </div>
+      <div class="unit-row">
+        <span class="unit-label">分</span>
+        <span class="unit-label">秒</span>
+      </div>
+    </div>
+
+    <div class="status" id="status">READY</div>
+    
+    <div class="reset-container">
+      <div class="reset-line"></div>
+      <div class="reset-hint">リセット</div>
+      <div class="reset-line"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="b-min" aria-label="increment minutes">分</button>
+      <button class="btn" id="b-sec" aria-label="increment seconds">秒</button>
+      <button class="btn btn-start" id="b-start" aria-label="start stop">スタート<br>ストップ</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

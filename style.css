@@ -1,0 +1,205 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* On big screens, show centered phone-sized view */
+.scene {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+}
+
+/* White timer body with realistic rounded corners and depth */
+.timer-body {
+  background: #ffffff;
+  border-radius: 40px;
+  padding: 24px 24px 28px;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #eaeaea;
+}
+
+/* TANITA brand styling matching real kitchenware */
+.brand {
+  text-align: center;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #0076a3;
+  letter-spacing: 5px;
+  margin-bottom: 14px;
+}
+
+/* LCD screen - Realistic retro reflective physics */
+.lcd {
+  background: #b8c1b0;
+  border-radius: 12px;
+  border: 3px solid #9fa896;
+  padding: 16px 10px 8px;
+  margin-bottom: 6px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Digit Area layout alignment */
+.digits-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Fixed container size prevents layout jumping */
+.digit-slot {
+  position: relative;
+  width: 110px;
+  height: 80px;
+  overflow: hidden;
+}
+
+/* Font styles utilizing Share Tech Mono */
+.digit-ghost, .digit-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 84px;
+  line-height: 1;
+  text-align: center;
+  user-select: none;
+  font-weight: bold;
+  letter-spacing: -2px;
+}
+
+/* Background unlit segments */
+.digit-ghost {
+  color: rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+/* Foreground active segments with subtle LCD blurring */
+.digit-val {
+  color: #1a2219;
+  text-shadow: 0 0 1px rgba(0,0,0,0.2);
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+}
+
+.colon {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 76px;
+  color: #1a2219;
+  line-height: 1;
+  margin-top: -10px;
+  user-select: none;
+  animation: blink 1s step-start infinite;
+}
+
+/* Unit labels positioning */
+.unit-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px 30px 0;
+}
+
+.unit-label {
+  font-size: 13px;
+  color: #4a5568;
+  font-weight: bold;
+}
+
+/* Status Line */
+.status {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #a0aec0;
+  height: 16px;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.status.run   { color: #38a169; }
+.status.pause { color: #dd6b20; }
+.status.done  { color: #e53e3e; }
+
+/* Enhanced Modernized Reset Hint Graphic */
+.reset-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 18px;
+}
+
+.reset-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #cbd5e0;
+}
+
+.reset-hint {
+  font-size: 11px;
+  color: #718096;
+  font-weight: 600;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+/* Button Row Layout */
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+/* High-quality Tactile Buttons */
+.btn {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #bce7f6;
+  border: 1px solid #8ecbe0;
+  color: #1a6b8c;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 #7cbcd3, 0 5px 10px rgba(0,0,0,0.1);
+  transition: all 0.05s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 #7cbcd3, 0 2px 4px rgba(0,0,0,0.1);
+  background: #a9def2;
+}
+
+/* Start/Stop Button distinct typography */
+.btn-start {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Optional: colon blinking when running */
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* Big screen centering override */
+@media (min-width: 480px) {
+  html, body { align-items: center; }
+  .scene { padding: 40px 20px; }
+}
