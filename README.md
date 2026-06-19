@@ -7,7 +7,7 @@ A minimal, mobile-first kitchen timer built with pure HTML, CSS, and JavaScript 
 ## Preview
 
 > A clean white timer body with a silver LCD screen, large circular buttons, and authentic 7-segment digit rendering.
-
+https://suman25027.github.io/Kitchen-Timer/
 ---
 
 ## Features
