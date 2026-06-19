@@ -136,3 +136,27 @@
   bSec.addEventListener('pointerup',   () => { secDown = false; });
   bMin.addEventListener('pointercancel', () => { minDown = false; });
   bSec.addEventListener('pointercancel', () => { secDown = false; });
+
+
+  // Target the new reset button element
+  const bReset = document.getElementById('b-reset');
+
+  // 1. Mouse Click Event for PC Users
+  bReset.addEventListener('click', () => {
+    reset();
+  });
+
+  // 2. Keyboard Shortcuts Engine for PC Users
+  window.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+    
+    if (key === 'r') {
+      // 'R' Key clears out the timer back to 00:00
+      e.preventDefault();
+      reset();
+    } else if (e.key === ' ' || key === 'spacebar') {
+      // Spacebar toggles start / pause states seamlessly
+      e.preventDefault();
+      document.getElementById('b-start').click();
+    }
+  });
