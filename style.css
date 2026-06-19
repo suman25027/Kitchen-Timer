@@ -203,3 +203,34 @@ html, body {
   html, body { align-items: center; }
   .scene { padding: 40px 20px; }
 }
+
+
+/* Update your existing .reset-container style to support button behaviors */
+.reset-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0 18px;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    padding: 4px 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Subtle interactive hovers for PC users */
+  .reset-container:hover .reset-hint {
+    color: #2d3748;
+  }
+  
+  .reset-container:hover .reset-line {
+    background-color: #a0aec0;
+  }
+  
+  /* Click styling physics */
+  .reset-container:active {
+    transform: scale(0.98);
+  }
