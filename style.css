@@ -1,3 +1,12 @@
+
+@font-face {
+  font-family: "NAS966";
+  src: url("fonts/NAS966.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -6,7 +15,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "NAS966", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* On big screens, show centered phone-sized view */
@@ -31,7 +40,7 @@ html, body {
 /* TANITA brand styling matching real kitchenware */
 .brand {
   text-align: center;
-  font-family: "Arial Black", Gadget, sans-serif;
+  font-family: "NAS966", "Arial Black", Gadget, sans-serif;
   font-size: 20px;
   font-weight: 900;
   color: #0076a3;
@@ -232,7 +241,7 @@ html, body {
   background: #bce7f6;
   border: 1px solid #8ecbe0;
   color: #1a6b8c;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "NAS966", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
