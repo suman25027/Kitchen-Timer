@@ -6,17 +6,43 @@
   let audioCtx = null;
   let minDown = false, secDown = false;
 
-  const dMin    = document.getElementById('d-min');
-  const dSec    = document.getElementById('d-sec');
+  const dMin1   = document.getElementById('d-min1');
+  const dMin2   = document.getElementById('d-min2');
+  const dSec1   = document.getElementById('d-sec1');
+  const dSec2   = document.getElementById('d-sec2');
   const colonEl = document.getElementById('colon');
   const statusEl= document.getElementById('status');
   const lcd     = document.getElementById('lcd');
 
+  const SEGMENT_MAP = {
+    0: ['a','b','c','d','e','f'],
+    1: ['b','c'],
+    2: ['a','b','g','e','d'],
+    3: ['a','b','g','c','d'],
+    4: ['f','g','b','c'],
+    5: ['a','f','g','c','d'],
+    6: ['a','f','g','e','c','d'],
+    7: ['a','b','c'],
+    8: ['a','b','c','d','e','f','g'],
+    9: ['a','b','c','d','f','g']
+  };
+
+  function setDigit(element, value) {
+    const active = SEGMENT_MAP[value] || [];
+    element.querySelectorAll('.segment').forEach(seg => {
+      seg.classList.toggle('on', active.includes(seg.dataset.seg));
+    });
+  }
+
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function render() {
-    dMin.textContent = pad(mins);
-    dSec.textContent = pad(secs);
+    const [m1, m2] = pad(mins).split('');
+    const [s1, s2] = pad(secs).split('');
+    setDigit(dMin1, Number(m1));
+    setDigit(dMin2, Number(m2));
+    setDigit(dSec1, Number(s1));
+    setDigit(dSec2, Number(s2));
   }
 
   function setStatus(text, cls) {
@@ -51,11 +77,11 @@
     blinkIv = setInterval(() => {
       count++;
       lcd.style.background = count % 2 === 0 ? '#c8ccc0' : '#e8ece0';
-      colonEl.style.visibility = count % 2 === 0 ? 'visible' : 'hidden';
+      colonEl.classList.toggle('visible', count % 2 === 0);
       if (count >= 14) {
         clearInterval(blinkIv);
         lcd.style.background = '#c8ccc0';
-        colonEl.style.visibility = 'visible';
+        colonEl.classList.add('visible');
       }
     }, 280);
   }
@@ -64,7 +90,7 @@
     clearInterval(iv);
     iv = null;
     running = false;
-    colonEl.style.visibility = 'visible';
+    colonEl.classList.add('visible');
   }
 
   function reset() {
@@ -91,7 +117,7 @@
     }
     render();
     colonOn = !colonOn;
-    colonEl.style.visibility = colonOn ? 'visible' : 'hidden';
+    colonEl.classList.toggle('visible', colonOn);
   }
 
   /* Start / Stop */
@@ -138,25 +164,43 @@
   bSec.addEventListener('pointercancel', () => { secDown = false; });
 
 
-  // Target the new reset button element
-  const bReset = document.getElementById('b-reset');
-
-  // 1. Mouse Click Event for PC Users
-  bReset.addEventListener('click', () => {
-    reset();
-  });
+  // Target the control buttons
+  const bStart = document.getElementById('b-start');
 
   // 2. Keyboard Shortcuts Engine for PC Users
   window.addEventListener('keydown', (e) => {
     const key = e.key.toLowerCase();
-    
+
+    if (key === 'm') {
+      if (running) return;
+      e.preventDefault();
+      mins = (mins + 1) % 100;
+      render();
+      setStatus('');
+      return;
+    }
+
+    if (key === 's') {
+      if (running) return;
+      e.preventDefault();
+      secs = (secs + 1) % 60;
+      render();
+      setStatus('');
+      return;
+    }
+
     if (key === 'r') {
-      // 'R' Key clears out the timer back to 00:00
       e.preventDefault();
       reset();
-    } else if (e.key === ' ' || key === 'spacebar') {
-      // Spacebar toggles start / pause states seamlessly
+      return;
+    }
+
+    if (key === ' ' || key === 'spacebar' || key === 'enter') {
       e.preventDefault();
-      document.getElementById('b-start').click();
+      bStart.click();
+      return;
     }
   });
+
+  render();
+  colonEl.classList.add('visible');

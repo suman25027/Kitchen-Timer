@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kitchen Timer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,13 +16,52 @@
     <div class="lcd" id="lcd">
       <div class="digits-row">
         <div class="digit-slot">
-          <div class="digit-ghost">88</div>
-          <div class="digit-val" id="d-min">00</div>
+          <div class="digit" id="d-min1">
+            <span class="segment segment-a" data-seg="a"></span>
+            <span class="segment segment-b" data-seg="b"></span>
+            <span class="segment segment-c" data-seg="c"></span>
+            <span class="segment segment-d" data-seg="d"></span>
+            <span class="segment segment-e" data-seg="e"></span>
+            <span class="segment segment-f" data-seg="f"></span>
+            <span class="segment segment-g" data-seg="g"></span>
+          </div>
         </div>
-        <div class="colon" id="colon">:</div>
         <div class="digit-slot">
-          <div class="digit-ghost">88</div>
-          <div class="digit-val" id="d-sec">00</div>
+          <div class="digit" id="d-min2">
+            <span class="segment segment-a" data-seg="a"></span>
+            <span class="segment segment-b" data-seg="b"></span>
+            <span class="segment segment-c" data-seg="c"></span>
+            <span class="segment segment-d" data-seg="d"></span>
+            <span class="segment segment-e" data-seg="e"></span>
+            <span class="segment segment-f" data-seg="f"></span>
+            <span class="segment segment-g" data-seg="g"></span>
+          </div>
+        </div>
+        <div class="colon" id="colon">
+          <span class="colon-dot"></span>
+          <span class="colon-dot"></span>
+        </div>
+        <div class="digit-slot">
+          <div class="digit" id="d-sec1">
+            <span class="segment segment-a" data-seg="a"></span>
+            <span class="segment segment-b" data-seg="b"></span>
+            <span class="segment segment-c" data-seg="c"></span>
+            <span class="segment segment-d" data-seg="d"></span>
+            <span class="segment segment-e" data-seg="e"></span>
+            <span class="segment segment-f" data-seg="f"></span>
+            <span class="segment segment-g" data-seg="g"></span>
+          </div>
+        </div>
+        <div class="digit-slot">
+          <div class="digit" id="d-sec2">
+            <span class="segment segment-a" data-seg="a"></span>
+            <span class="segment segment-b" data-seg="b"></span>
+            <span class="segment segment-c" data-seg="c"></span>
+            <span class="segment segment-d" data-seg="d"></span>
+            <span class="segment segment-e" data-seg="e"></span>
+            <span class="segment segment-f" data-seg="f"></span>
+            <span class="segment segment-g" data-seg="g"></span>
+          </div>
         </div>
       </div>
       <div class="unit-row">
@@ -35,20 +71,16 @@
     </div>
 
     <div class="status" id="status">READY</div>
-    
-    <button class="reset-container" id="b-reset" aria-label="Reset timer">
-        <div class="reset-line"></div>
-        <div class="reset-hint">リセット</div>
-        <div class="reset-line"></div>
-      </button>
 
     <div class="btn-row">
-      <button class="btn" id="b-min" aria-label="increment minutes">分</button>
-      <button class="btn" id="b-sec" aria-label="increment seconds">秒</button>
-      <button class="btn btn-start" id="b-start" aria-label="start stop">スタート<br>ストップ</button>
-    </div>
-    <div>
-        <button></button>
+      <div class="button-block">
+        <div class="reset-bridge">リセット (R)</div>
+        <div class="button-pair">
+          <button class="btn" id="b-min" aria-label="increment minutes (M)" title="Shortcut: M">分<br><small>（M）</small></button>
+          <button class="btn" id="b-sec" aria-label="increment seconds (S)" title="Shortcut: S">秒<br><small>（S）</small></button>
+        </div>
+      </div>
+      <button class="btn btn-start" id="b-start" aria-label="start stop (Space)" title="Shortcut: Space">スタート<br>ストップ<br><small>（Space）</small></button>
     </div>
 
   </div>
