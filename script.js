@@ -4,6 +4,10 @@
   let colonOn = true;
   let blinkIv = null;
   let audioCtx = null;
+  let beepOsc = null;
+  let beepGain = null;
+  let beepIv = null;
+  let beepTimeout = null;
   let minDown = false, secDown = false;
 
   const dMin1   = document.getElementById('d-min1');
@@ -51,24 +55,53 @@
   }
 
   /* Web Audio beep sequence */
-  function beep() {
+  function startBeep(durationMs = 35000) {
     try {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const pattern = [880, 1100, 880, 1100, 880];
-      pattern.forEach((freq, i) => {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.type = 'square';
-        osc.frequency.value = freq;
-        const t = audioCtx.currentTime + i * 0.22;
-        gain.gain.setValueAtTime(0.28, t);
-        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-        osc.start(t);
-        osc.stop(t + 0.18);
-      });
-    } catch(e) {}
+      if (beepOsc) return;
+
+      beepOsc = audioCtx.createOscillator();
+      beepGain = audioCtx.createGain();
+      beepOsc.connect(beepGain);
+      beepGain.connect(audioCtx.destination);
+      beepOsc.type = 'square';
+      beepOsc.frequency.value = 880;
+      beepGain.gain.setValueAtTime(0.24, audioCtx.currentTime);
+      beepOsc.start();
+
+      beepIv = setInterval(() => {
+        if (!beepGain) return;
+        const now = audioCtx.currentTime;
+        beepGain.gain.setValueAtTime(0.08, now);
+        beepGain.gain.linearRampToValueAtTime(0.24, now + 0.1);
+      }, 220);
+
+      beepTimeout = setTimeout(stopBeep, durationMs);
+    } catch (e) {
+      console.warn('beep failed', e);
+    }
+  }
+
+  function stopBeep() {
+    if (beepIv) {
+      clearInterval(beepIv);
+      beepIv = null;
+    }
+    if (beepTimeout) {
+      clearTimeout(beepTimeout);
+      beepTimeout = null;
+    }
+    if (beepOsc) {
+      try {
+        beepOsc.stop();
+      } catch (e) {}
+      beepOsc.disconnect();
+      beepOsc = null;
+    }
+    if (beepGain) {
+      beepGain.disconnect();
+      beepGain = null;
+    }
   }
 
   /* LCD flash when done */
@@ -90,6 +123,7 @@
     clearInterval(iv);
     iv = null;
     running = false;
+    stopBeep();
     colonEl.classList.add('visible');
   }
 
@@ -111,7 +145,7 @@
     } else {
       stopTimer();
       setStatus('done!', 'done');
-      beep();
+      startBeep(35000);
       flashDone();
       return;
     }
